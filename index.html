@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Susan Long: Ethical Fashion Design and Dressmaking</title>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #000;
+      --off-white: #e8e8e0;
+      --nav-height: 44px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--off-white);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      min-height: 100vh;
+      display: flex;
+      padding-bottom: var(--nav-height);
+    }
+
+    /* left content pane */
+    .pane-left {
+      width: 50%;
+      padding: 60px 48px 40px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    /* right feature photo */
+    .pane-right {
+      width: 50%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pane-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    /* ── HERO ── */
+    #home .pane-left {
+      justify-content: center;
+    }
+
+    .site-title {
+      font-family: 'IM Fell English', serif;
+      font-size: clamp(52px, 6vw, 88px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+      margin-bottom: 24px;
+    }
+
+    .site-subtitle {
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: #c8c8c0;
+    }
+
+    /* ── SECTION HEADINGS ── */
+    .section-title {
+      font-family: 'IM Fell English', serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 400;
+      margin-bottom: 32px;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── THUMBNAIL GRID ── */
+    .thumb-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .thumb-grid.cols-4 {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .thumb-grid a {
+      display: block;
+      overflow: hidden;
+      aspect-ratio: 1;
+      cursor: pointer;
+    }
+
+    .thumb-grid a img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.2s ease;
+    }
+
+    .thumb-grid a:hover img {
+      opacity: 0.8;
+    }
+
+    /* ── ABOUT ── */
+    #about .pane-left {
+      justify-content: center;
+    }
+
+    .about-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #c8c8c0;
+      max-width: 400px;
+    }
+
+    /* ── CONTACT ── */
+    #contact .pane-left {
+      justify-content: center;
+    }
+
+    .contact-box {
+      background: rgba(40, 40, 40, 0.7);
+      padding: 36px 40px;
+      max-width: 340px;
+    }
+
+    .contact-box p {
+      margin-bottom: 16px;
+      line-height: 1.7;
+    }
+
+    .contact-box a {
+      color: var(--off-white);
+      text-decoration: none;
+    }
+
+    .contact-box a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── BOTTOM NAV ── */
+    nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-height);
+      background: rgba(0, 0, 0, 0.92);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      z-index: 100;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    nav a {
+      color: var(--off-white);
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 0.03em;
+      margin-right: 20px;
+      opacity: 0.85;
+      transition: opacity 0.15s;
+    }
+
+    nav a:hover { opacity: 1; }
+
+    .nav-fb {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 0;
+    }
+
+    .nav-fb img {
+      width: 18px;
+      height: 18px;
+      opacity: 0.7;
+    }
+
+    .nav-right {
+      margin-left: auto;
+      font-size: 12px;
+      opacity: 0.4;
+      color: var(--off-white);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox.open {
+      display: flex;
+    }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    #lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      font-size: 32px;
+      color: var(--off-white);
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      background: none;
+      border: none;
+    }
+
+    #lightbox-close:hover { opacity: 1; }
+
+    #lightbox-prev,
+    #lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 36px;
+      color: var(--off-white);
+      cursor: pointer;
+      opacity: 0.5;
+      background: none;
+      border: none;
+      padding: 0 16px;
+    }
+
+    #lightbox-prev { left: 12px; }
+    #lightbox-next { right: 12px; }
+    #lightbox-prev:hover, #lightbox-next:hover { opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column;
+        min-height: auto;
+      }
+
+      .pane-left, .pane-right {
+        width: 100%;
+      }
+
+      .pane-right {
+        height: 60vw;
+        min-height: 260px;
+      }
+
+      .pane-left {
+        padding: 40px 24px 32px;
+      }
+
+      .thumb-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .thumb-grid.cols-4 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      nav a { font-size: 11px; margin-right: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HOME ── -->
+<section class="section" id="home">
+  <div class="pane-left">
+    <h1 class="site-title">Susan<br>Long</h1>
+    <p class="site-subtitle">Ethical Fashion Design and Dressmaking</p>
+  </div>
+  <div class="pane-right">
+    <img src="images/collection1/1.jpg" alt="Susan Long — Collection One">
+  </div>
+</section>
+
+<!-- ── COLLECTION ONE ── -->
+<section class="section" id="collectionone">
+  <div class="pane-left">
+    <h2 class="section-title">Collection One</h2>
+    <div class="thumb-grid" id="grid-c1">
+      <!-- js-populated -->
+    </div>
+  </div>
+  <div class="pane-right" id="feature-c1">
+    <img src="images/collection1/thumbs/1_sm.jpg" alt="" id="feature-c1-img">
+  </div>
+</section>
+
+<!-- ── BEHIND THE SCENES ── -->
+<section class="section" id="behindscenes">
+  <div class="pane-left">
+    <h2 class="section-title">Behind the scenes<br>Collection 1 photo shoot</h2>
+    <div class="thumb-grid cols-4" id="grid-bts">
+      <!-- js-populated -->
+    </div>
+  </div>
+  <div class="pane-right" id="feature-bts">
+    <img src="images/collection1/behindscenes/thumbs/1_sm.jpg" alt="" id="feature-bts-img">
+  </div>
+</section>
+
+<!-- ── COLLECTION TWO ── -->
+<section class="section" id="collectiontwo">
+  <div class="pane-left">
+    <h2 class="section-title">Collection Two</h2>
+    <div class="thumb-grid" id="grid-c2">
+      <!-- js-populated -->
+    </div>
+  </div>
+  <div class="pane-right" id="feature-c2">
+    <img src="images/collection2/thumbs/1_sm.jpg" alt="" id="feature-c2-img">
+  </div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="section" id="about">
+  <div class="pane-left">
+    <h2 class="section-title">About Susan Long:<br>Ethical Fashion Design<br>and Dressmaking</h2>
+    <p class="about-text">Original designs fusing the best of East and West, with a focus on organic fabrics and fair labour.</p>
+  </div>
+  <div class="pane-right">
+    <img src="images/collection2/5.jpg" alt="Susan Long">
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="section" id="contact">
+  <div class="pane-left">
+    <div class="contact-box">
+      <h2 class="section-title">Contact</h2>
+      <p>All queries:<br><a href="mailto:info@susanlong.org">info@susanlong.org</a></p>
+      <p>To join the mail list:<br><a href="mailto:mail@susanlong.org">mail@susanlong.org</a></p>
+    </div>
+  </div>
+  <div class="pane-right">
+    <img src="images/collection2/15.jpg" alt="Susan Long">
+  </div>
+</section>
+
+<!-- ── BOTTOM NAV ── -->
+<nav>
+  <a href="#home">Home</a>
+  <a href="#collectionone">Collection one</a>
+  <a href="#behindscenes">Behind the scenes</a>
+  <a href="#collectiontwo">Collection two</a>
+  <a href="#about">About</a>
+  <a href="#contact">Contact</a>
+  <a href="https://www.facebook.com/pages/Susan-Long-Ethical-Fashion-Design-and-Dressmaking/124109854320101" class="nav-fb" target="_blank" rel="noopener" aria-label="Facebook">
+    <img src="images/facebook.png" alt="Facebook">
+  </a>
+  <span class="nav-right">© 2011 Susan Long &nbsp;|&nbsp; Website by Mary Ho</span>
+</nav>
+
+<!-- ── LIGHTBOX ── -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button id="lightbox-close" aria-label="Close">×</button>
+  <button id="lightbox-prev" aria-label="Previous">&#8249;</button>
+  <img id="lightbox-img" src="" alt="">
+  <button id="lightbox-next" aria-label="Next">›</button>
+</div>
+
+<script>
+  // ── Gallery data ──
+  const galleries = {
+    'grid-c1': {
+      count: 15,
+      thumb: i => `images/collection1/thumbs/${i}_sm.jpg`,
+      full:  i => `images/collection1/${i}.jpg`,
+      feature: 'feature-c1-img'
+    },
+    'grid-bts': {
+      count: 12,
+      thumb: i => `images/collection1/behindscenes/thumbs/${i}_sm.jpg`,
+      full:  i => `images/collection1/behindscenes/${i}.jpg`,
+      feature: 'feature-bts-img'
+    },
+    'grid-c2': {
+      count: 20,
+      thumb: i => `images/collection2/thumbs/${i}_sm.jpg`,
+      full:  i => `images/collection2/${i}.jpg`,
+      feature: 'feature-c2-img'
+    }
+  };
+
+  // Current lightbox state
+  let lbImages = [];
+  let lbIndex  = 0;
+
+  // Build grids
+  Object.entries(galleries).forEach(([gridId, g]) => {
+    const grid = document.getElementById(gridId);
+    const featureImg = document.getElementById(g.feature);
+    const fullUrls = [];
+
+    for (let i = 1; i <= g.count; i++) {
+      fullUrls.push(g.full(i));
+      const a = document.createElement('a');
+      a.href = '#';
+      a.dataset.full = g.full(i);
+      a.dataset.gallery = gridId;
+      a.dataset.index = i - 1;
+
+      const img = document.createElement('img');
+      img.src = g.thumb(i);
+      img.alt = '';
+      img.loading = 'lazy';
+
+      // Hover: update feature image
+      a.addEventListener('mouseenter', () => {
+        featureImg.src = g.full(i);
+      });
+
+      // Click: open lightbox
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        lbImages = fullUrls;
+        lbIndex = i - 1;
+        openLightbox();
+      });
+
+      a.appendChild(img);
+      grid.appendChild(a);
+    }
+  });
+
+  // ── Lightbox ──
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lightbox-img');
+  const lbClose = document.getElementById('lightbox-close');
+  const lbPrev  = document.getElementById('lightbox-prev');
+  const lbNext  = document.getElementById('lightbox-next');
+
+  function openLightbox() {
+    lbImg.src = lbImages[lbIndex];
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showPrev() {
+    lbIndex = (lbIndex - 1 + lbImages.length) % lbImages.length;
+    lbImg.src = lbImages[lbIndex];
+  }
+
+  function showNext() {
+    lbIndex = (lbIndex + 1) % lbImages.length;
+    lbImg.src = lbImages[lbIndex];
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', showPrev);
+  lbNext.addEventListener('click', showNext);
+
+  lb.addEventListener('click', e => {
+    if (e.target === lb) closeLightbox();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowLeft')   showPrev();
+    if (e.key === 'ArrowRight')  showNext();
+  });
+</script>
+</body>
+</html>
