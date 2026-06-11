@@ -30,22 +30,28 @@
       min-height: 100vh;
       display: flex;
       padding-bottom: var(--nav-height);
+      position: relative;
+      overflow: hidden;
     }
 
-    /* left content pane */
+    /* left content pane — sits over the photo */
     .pane-left {
-      width: 50%;
+      width: 44%;
       padding: 60px 48px 40px 48px;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      position: relative;
+      z-index: 2;
     }
 
-    /* right feature photo */
+    /* right feature photo — takes up ~80% of width from right edge */
     .pane-right {
-      width: 50%;
-      position: relative;
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 80%;
       overflow: hidden;
+      z-index: 1;
     }
 
     .pane-right img {
@@ -54,6 +60,18 @@
       object-fit: cover;
       object-position: center top;
       display: block;
+      transition: opacity 0.4s ease;
+    }
+
+    /* fade from black on left edge of photo */
+    .pane-right::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 260px;
+      background: linear-gradient(to right, #000 0%, transparent 100%);
+      z-index: 2;
+      pointer-events: none;
     }
 
     /* ── HERO ── */
@@ -117,6 +135,13 @@
       opacity: 0.8;
     }
 
+    /* ── SEMI-TRANSPARENT TEXT BOX (Home, About, Contact) ── */
+    .text-box {
+      background: rgba(0, 0, 0, 0.55);
+      padding: 36px 40px;
+      max-width: 420px;
+    }
+
     /* ── ABOUT ── */
     #about .pane-left {
       justify-content: center;
@@ -126,18 +151,12 @@
       font-size: 15px;
       line-height: 1.8;
       color: #c8c8c0;
-      max-width: 400px;
+      margin-top: 12px;
     }
 
     /* ── CONTACT ── */
     #contact .pane-left {
       justify-content: center;
-    }
-
-    .contact-box {
-      background: rgba(40, 40, 40, 0.7);
-      padding: 36px 40px;
-      max-width: 340px;
     }
 
     .contact-box p {
@@ -243,7 +262,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 36px;
+      font-size: 48px;
       color: var(--off-white);
       cursor: pointer;
       opacity: 0.5;
@@ -263,18 +282,20 @@
         min-height: auto;
       }
 
-      .pane-left, .pane-right {
+      .pane-left {
         width: 100%;
+        position: relative;
+        z-index: 2;
       }
 
       .pane-right {
+        position: relative;
+        width: 100%;
         height: 60vw;
         min-height: 260px;
       }
 
-      .pane-left {
-        padding: 40px 24px 32px;
-      }
+      .pane-right::before { display: none; }
 
       .thumb-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -293,8 +314,10 @@
 <!-- ── HOME ── -->
 <section class="section" id="home">
   <div class="pane-left">
-    <h1 class="site-title">Susan<br>Long</h1>
-    <p class="site-subtitle">Ethical Fashion Design and Dressmaking</p>
+    <div class="text-box">
+      <h1 class="site-title">Susan<br>Long</h1>
+      <p class="site-subtitle">Ethical Fashion Design and Dressmaking</p>
+    </div>
   </div>
   <div class="pane-right">
     <img src="collection1/1.jpg" alt="Susan Long — Collection One">
@@ -305,12 +328,10 @@
 <section class="section" id="collectionone">
   <div class="pane-left">
     <h2 class="section-title">Collection One</h2>
-    <div class="thumb-grid" id="grid-c1">
-      <!-- js-populated -->
-    </div>
+    <div class="thumb-grid" id="grid-c1"></div>
   </div>
-  <div class="pane-right" id="feature-c1">
-    <img src="collection1/thumbs/1_sm.jpg" alt="" id="feature-c1-img">
+  <div class="pane-right">
+    <img src="collection1/4.jpg" alt="Collection One">
   </div>
 </section>
 
@@ -318,12 +339,10 @@
 <section class="section" id="behindscenes">
   <div class="pane-left">
     <h2 class="section-title">Behind the scenes<br>Collection 1 photo shoot</h2>
-    <div class="thumb-grid cols-4" id="grid-bts">
-      <!-- js-populated -->
-    </div>
+    <div class="thumb-grid cols-4" id="grid-bts"></div>
   </div>
-  <div class="pane-right" id="feature-bts">
-    <img src="collection1/behindscenes/thumbs/1_sm.jpg" alt="" id="feature-bts-img">
+  <div class="pane-right">
+    <img src="collection1/behindscenes/1.jpg" alt="Behind the scenes">
   </div>
 </section>
 
@@ -331,20 +350,20 @@
 <section class="section" id="collectiontwo">
   <div class="pane-left">
     <h2 class="section-title">Collection Two</h2>
-    <div class="thumb-grid" id="grid-c2">
-      <!-- js-populated -->
-    </div>
+    <div class="thumb-grid" id="grid-c2"></div>
   </div>
-  <div class="pane-right" id="feature-c2">
-    <img src="collection2/thumbs/1_sm.jpg" alt="" id="feature-c2-img">
+  <div class="pane-right">
+    <img src="collection2/1.jpg" alt="Collection Two">
   </div>
 </section>
 
 <!-- ── ABOUT ── -->
 <section class="section" id="about">
   <div class="pane-left">
-    <h2 class="section-title">About Susan Long:<br>Ethical Fashion Design<br>and Dressmaking</h2>
-    <p class="about-text">Original designs fusing the best of East and West, with a focus on organic fabrics and fair labour.</p>
+    <div class="text-box">
+      <h2 class="section-title">About Susan Long:<br>Ethical Fashion Design<br>and Dressmaking</h2>
+      <p class="about-text">Original designs fusing the best of East and West, with a focus on organic fabrics and fair labour.</p>
+    </div>
   </div>
   <div class="pane-right">
     <img src="collection2/5.jpg" alt="Susan Long">
@@ -354,7 +373,7 @@
 <!-- ── CONTACT ── -->
 <section class="section" id="contact">
   <div class="pane-left">
-    <div class="contact-box">
+    <div class="text-box contact-box">
       <h2 class="section-title">Contact</h2>
       <p>All queries:<br><a href="mailto:info@susanlong.org">info@susanlong.org</a></p>
       <p>To join the mail list:<br><a href="mailto:mail@susanlong.org">mail@susanlong.org</a></p>
@@ -384,61 +403,45 @@
   <button id="lightbox-close" aria-label="Close">×</button>
   <button id="lightbox-prev" aria-label="Previous">&#8249;</button>
   <img id="lightbox-img" src="" alt="">
-  <button id="lightbox-next" aria-label="Next">›</button>
+  <button id="lightbox-next" aria-label="Next">&#8250;</button>
 </div>
 
 <script>
-  // ── Gallery data ──
   const galleries = {
     'grid-c1': {
       count: 15,
       thumb: i => `collection1/thumbs/${i}_sm.jpg`,
       full:  i => `collection1/${i}.jpg`,
-      feature: 'feature-c1-img'
     },
     'grid-bts': {
       count: 12,
       thumb: i => `collection1/behindscenes/thumbs/${i}_sm.jpg`,
       full:  i => `collection1/behindscenes/${i}.jpg`,
-      feature: 'feature-bts-img'
     },
     'grid-c2': {
       count: 20,
       thumb: i => `collection2/thumbs/${i}_sm.jpg`,
       full:  i => `collection2/${i}.jpg`,
-      feature: 'feature-c2-img'
     }
   };
 
-  // Current lightbox state
   let lbImages = [];
   let lbIndex  = 0;
 
-  // Build grids
   Object.entries(galleries).forEach(([gridId, g]) => {
     const grid = document.getElementById(gridId);
-    const featureImg = document.getElementById(g.feature);
     const fullUrls = [];
 
     for (let i = 1; i <= g.count; i++) {
       fullUrls.push(g.full(i));
       const a = document.createElement('a');
       a.href = '#';
-      a.dataset.full = g.full(i);
-      a.dataset.gallery = gridId;
-      a.dataset.index = i - 1;
 
       const img = document.createElement('img');
       img.src = g.thumb(i);
       img.alt = '';
       img.loading = 'lazy';
 
-      // Hover: update feature image
-      a.addEventListener('mouseenter', () => {
-        featureImg.src = g.full(i);
-      });
-
-      // Click: open lightbox
       a.addEventListener('click', e => {
         e.preventDefault();
         lbImages = fullUrls;
@@ -451,7 +454,6 @@
     }
   });
 
-  // ── Lightbox ──
   const lb      = document.getElementById('lightbox');
   const lbImg   = document.getElementById('lightbox-img');
   const lbClose = document.getElementById('lightbox-close');
@@ -489,9 +491,9 @@
 
   document.addEventListener('keydown', e => {
     if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape')      closeLightbox();
-    if (e.key === 'ArrowLeft')   showPrev();
-    if (e.key === 'ArrowRight')  showNext();
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  showPrev();
+    if (e.key === 'ArrowRight') showNext();
   });
 </script>
 </body>
