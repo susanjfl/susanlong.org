@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Susan Long: Ethical Fashion Design and Dressmaking</title>
-  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Lato:wght@300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -62,9 +62,9 @@
     }
 
     .site-title {
-      font-family: 'IM Fell English', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-size: clamp(52px, 6vw, 88px);
-      font-weight: 400;
+      font-weight: 300;
       line-height: 1.05;
       letter-spacing: 0.01em;
       margin-bottom: 24px;
@@ -79,7 +79,7 @@
 
     /* ── SECTION HEADINGS ── */
     .section-title {
-      font-family: 'IM Fell English', serif;
+      font-family: 'Cormorant Garamond', serif;
       font-size: clamp(24px, 3vw, 36px);
       font-weight: 400;
       margin-bottom: 32px;
@@ -297,7 +297,7 @@
     <p class="site-subtitle">Ethical Fashion Design and Dressmaking</p>
   </div>
   <div class="pane-right">
-    <img src="images/collection1/1.jpg" alt="Susan Long — Collection One">
+    <img src="collection1/1.jpg" alt="Susan Long — Collection One">
   </div>
 </section>
 
@@ -310,7 +310,7 @@
     </div>
   </div>
   <div class="pane-right" id="feature-c1">
-    <img src="images/collection1/thumbs/1_sm.jpg" alt="" id="feature-c1-img">
+    <img src="collection1/thumbs/1_sm.jpg" alt="" id="feature-c1-img">
   </div>
 </section>
 
@@ -323,7 +323,7 @@
     </div>
   </div>
   <div class="pane-right" id="feature-bts">
-    <img src="images/collection1/behindscenes/thumbs/1_sm.jpg" alt="" id="feature-bts-img">
+    <img src="collection1/behindscenes/thumbs/1_sm.jpg" alt="" id="feature-bts-img">
   </div>
 </section>
 
@@ -336,7 +336,7 @@
     </div>
   </div>
   <div class="pane-right" id="feature-c2">
-    <img src="images/collection2/thumbs/1_sm.jpg" alt="" id="feature-c2-img">
+    <img src="collection2/thumbs/1_sm.jpg" alt="" id="feature-c2-img">
   </div>
 </section>
 
@@ -347,7 +347,7 @@
     <p class="about-text">Original designs fusing the best of East and West, with a focus on organic fabrics and fair labour.</p>
   </div>
   <div class="pane-right">
-    <img src="images/collection2/5.jpg" alt="Susan Long">
+    <img src="collection2/5.jpg" alt="Susan Long">
   </div>
 </section>
 
@@ -361,7 +361,7 @@
     </div>
   </div>
   <div class="pane-right">
-    <img src="images/collection2/15.jpg" alt="Susan Long">
+    <img src="collection2/15.jpg" alt="Susan Long">
   </div>
 </section>
 
@@ -392,20 +392,20 @@
   const galleries = {
     'grid-c1': {
       count: 15,
-      thumb: i => `images/collection1/thumbs/${i}_sm.jpg`,
-      full:  i => `images/collection1/${i}.jpg`,
+      thumb: i => `collection1/thumbs/${i}_sm.jpg`,
+      full:  i => `collection1/${i}.jpg`,
       feature: 'feature-c1-img'
     },
     'grid-bts': {
       count: 12,
-      thumb: i => `images/collection1/behindscenes/thumbs/${i}_sm.jpg`,
-      full:  i => `images/collection1/behindscenes/${i}.jpg`,
+      thumb: i => `collection1/behindscenes/thumbs/${i}_sm.jpg`,
+      full:  i => `collection1/behindscenes/${i}.jpg`,
       feature: 'feature-bts-img'
     },
     'grid-c2': {
       count: 20,
-      thumb: i => `images/collection2/thumbs/${i}_sm.jpg`,
-      full:  i => `images/collection2/${i}.jpg`,
+      thumb: i => `collection2/thumbs/${i}_sm.jpg`,
+      full:  i => `collection2/${i}.jpg`,
       feature: 'feature-c2-img'
     }
   };
