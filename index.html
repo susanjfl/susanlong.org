@@ -14,7 +14,7 @@
       --nav-height: 44px;
     }
 
-    html { scroll-behavior: smooth; }
+    html {scroll-snap-type: y mandatory; }
 
     body {
       background: var(--black);
@@ -32,6 +32,7 @@
       padding-bottom: var(--nav-height);
       position: relative;
       overflow: hidden;
+      scroll-snap-align: start;
     }
 
     /* left content pane — sits over the photo */
